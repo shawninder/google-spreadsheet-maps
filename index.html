@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en-CA'>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset='utf-8'>
+    <title>Maps</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='map'></div>
+    <script>
+      var map
+      function initMap() {
+        const options = {
+          center: { lat: 60, lng: -90 },
+          zoom: 4,
+          mapTypeId: 'satellite'
+        }
+        map = new google.maps.Map(document.getElementById('map'), options);
+        const label = 'HERE'
+        const marker = new google.maps.Marker({
+          map,
+          position: options.center,
+          icon: 'http://iconbug.com/data/e4/32/9f04fc662edbcb9ec2b2ed340c85b39b.png',
+          title: 'Click for details'
+        })
+
+        const infowindow = new google.maps.InfoWindow({
+          content: `<div class="hella">Hella ${label}s!</div>`
+        })
+        marker.addListener('click', function () {
+          infowindow.open(map, marker)
+        })
+      }
+    </script>
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCMFfWYnXiQ-1xGr7oEbKSotlMiU4XPwJ8&callback=initMap'
+    async defer></script>
+  </body>
+</html>
